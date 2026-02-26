@@ -102,61 +102,34 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 <div class="container">
 
 <!-- ======================== -->
-<!-- Section 1: Regular Life  -->
+<!-- What's being compared    -->
 <!-- ======================== -->
 <div class="section">
-  <h2>ביטוח חיים רגיל (ריסק)</h2>
-  <p class="section-sub">הפניקס — פוליסה 2814174088</p>
+  <h2>מה כולל כל מסלול?</h2>
 
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="label">מבוטחים</div>
-      <div class="value">צבי + מיכל</div>
-      <div class="detail">צבי: ₪1,200,000 | מיכל: ₪1,000,000</div>
-    </div>
-    <div class="info-card">
-      <div class="label">תקופה</div>
-      <div class="value">02/2024 — 02/2054</div>
-      <div class="detail">30 שנה</div>
-    </div>
-    <div class="info-card">
-      <div class="label">סוג פרמיה</div>
-      <div class="value">משתנה (עולה)</div>
-      <div class="detail">עם הנחה יורדת מ-60% עד 0%</div>
-    </div>
+  <div class="coverage-note">
+    <strong>שיטה ישנה — הפניקס בלבד:</strong>
+    ריסק רגיל (2814174088): צבי ₪1.2M + מיכל ₪1M<br>
+    + משכנתא (3109874085): ₪1.35M משותף לשניהם (תשלום אחד במקרה פטירה)<br>
+    <strong>סה"כ כיסוי: ₪3.55M</strong> | עד 2048
   </div>
 
-  <div class="table-wrap" id="risk-table"></div>
+  <div class="coverage-note" style="background: #eef6fe; border-color: #2980b9;">
+    <strong>שיטה חדשה — הפניקס ריסק + AIG משכנתא:</strong>
+    ריסק רגיל (2814174088): צבי ₪1.2M + מיכל ₪1M — <em>נשאר כמו שהוא</em><br>
+    + AIG משכנתא: ₪1.35M יורד + ₪1M קבוע = <strong>₪2.35M לכל מבוטח בנפרד</strong> (הנחה 20%)<br>
+    <strong>סה"כ כיסוי: ₪4.55M+</strong> | עד 2055
+  </div>
 </div>
 
 <!-- ======================== -->
-<!-- Section 2: Mortgage Life -->
+<!-- Combined comparison      -->
 <!-- ======================== -->
 <div class="section">
-  <h2>ביטוח חיים למשכנתא — השוואת מחירים</h2>
-  <p class="section-sub">הפניקס 3109874085 מול AIG 70080260326 + 70080262326</p>
+  <h2>השוואת עלות שנתית כוללת</h2>
+  <p class="section-sub">סה"כ ביטוח חיים לשנה — שיטה ישנה (הפניקס) מול שיטה חדשה (הפניקס ריסק + AIG)</p>
 
-  <div class="coverage-note">
-    <strong>הבדל חשוב בכיסוי:</strong>
-    הפניקס — פוליסה אחת, סכום <strong>₪1,350,000</strong> משותף לשני המבוטחים (משולם פעם אחת במקרה פטירה).<br>
-    AIG — שתי פוליסות: ₪1,350,000 יורד + ₪1,000,000 קבוע = <strong>₪2,350,000 לכל מבוטח בנפרד</strong>.<br>
-    הנחה 20% על AIG עד סוף התקופה.
-  </div>
-
-  <div class="info-grid">
-    <div class="info-card" style="border-right: 4px solid #e67e22;">
-      <div class="label">הפניקס 3109874085</div>
-      <div class="value">₪1,350,000</div>
-      <div class="detail">משותף לצבי ומיכל | 06/2025–06/2055</div>
-    </div>
-    <div class="info-card" style="border-right: 4px solid #2980b9;">
-      <div class="label">AIG (שתי פוליסות)</div>
-      <div class="value">₪2,350,000 לכל מבוטח</div>
-      <div class="detail">70080260326 (1.35M יורד) + 70080262326 (1M קבוע) | 01/2026–2055</div>
-    </div>
-  </div>
-
-  <div class="table-wrap" id="mortgage-table"></div>
+  <div class="table-wrap" id="combined-table"></div>
 </div>
 
 <!-- ======================== -->
@@ -271,89 +244,77 @@ var DISCOUNT = 0.8; // 20% discount
 
 function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
 
+// Build risk lookup: year → monthly
+var riskByYear = {};
+for (var i = 0; i < riskData.length; i++) riskByYear[riskData[i].year] = riskData[i].monthly;
+
 function buildTables() {
-  buildRiskTable();
-  buildMortgageTable();
-}
-
-function buildRiskTable() {
-  var html = '<table>';
-  html += '<thead><tr><th>שנה</th><th>פרמיה שנתית</th><th>סה"כ מצטבר</th></tr></thead>';
-  html += '<tbody>';
-  var cumulative = 0;
-  for (var i = 0; i < riskData.length; i++) {
-    var d = riskData[i];
-    var annual = d.monthly * 12;
-    cumulative += annual;
-    var cls = (d.year === 2026) ? ' class="year-highlight"' : '';
-    html += '<tr' + cls + '>';
-    html += '<td><strong>' + d.year + '</strong></td>';
-    html += '<td>₪' + fmt(annual) + '</td>';
-    html += '<td>₪' + fmt(cumulative) + '</td>';
-    html += '</tr>';
-  }
-  var totalAll = 0;
-  for (var i = 0; i < riskData.length; i++) totalAll += riskData[i].monthly * 12;
-  html += '<tr class="summary-row"><td>סה"כ לכל התקופה</td><td></td><td>₪' + fmt(totalAll) + '</td></tr>';
-  html += '</tbody></table>';
-  document.getElementById('risk-table').innerHTML = html;
-}
-
-function buildMortgageTable() {
-  // Collect all years
-  var years = [];
-  var allKeys = Object.keys(phoenixMortgage).concat(Object.keys(aig1Before)).concat(Object.keys(aig2Before));
-  var seen = {};
-  for (var i = 0; i < allKeys.length; i++) {
-    var y = parseInt(allKeys[i]);
-    if (!seen[y]) { years.push(y); seen[y] = true; }
+  // Collect all years from all data sources
+  var years = [], seen = {};
+  var sources = [riskByYear, phoenixMortgage, aig1Before, aig2Before];
+  for (var s = 0; s < sources.length; s++) {
+    var keys = Object.keys(sources[s]);
+    for (var i = 0; i < keys.length; i++) {
+      var y = parseInt(keys[i]);
+      if (!seen[y]) { years.push(y); seen[y] = true; }
+    }
   }
   years.sort(function(a,b){ return a-b; });
 
   var html = '<table>';
   html += '<thead><tr>';
   html += '<th>שנה</th>';
-  html += '<th style="background:#c0792a;">הפניקס<br>שנתי</th>';
-  html += '<th style="background:#1a6baa;">AIG<br>שנתי</th>';
+  html += '<th style="background:#c0792a;">שיטה ישנה<br>הפניקס בלבד</th>';
+  html += '<th style="background:#1a6baa;">שיטה חדשה<br>ריסק + AIG</th>';
   html += '<th style="background:#444;">הפרש</th>';
   html += '</tr></thead>';
   html += '<tbody>';
 
-  var cumPhoenix = 0, cumAig = 0;
+  var cumOld = 0, cumNew = 0;
 
   for (var i = 0; i < years.length; i++) {
     var y = years[i];
-    var ph = phoenixMortgage[y] || 0;
-    var a1 = (aig1Before[y] || 0) * DISCOUNT;
-    var a2 = (aig2Before[y] || 0) * DISCOUNT;
-    var aigTotal = a1 + a2;
 
-    var phAnnual = ph * 12;
-    var aigAnnual = aigTotal * 12;
-    cumPhoenix += phAnnual;
-    cumAig += aigAnnual;
+    // Risk premium — same in both approaches
+    var risk = (riskByYear[y] || 0) * 12;
 
-    var phVal = ph ? '₪' + fmt(phAnnual) : '—';
-    var aigVal = aigTotal ? '₪' + fmt(aigAnnual) : '—';
+    // Old approach: Phoenix risk + Phoenix mortgage
+    var phMort = (phoenixMortgage[y] || 0) * 12;
+    var oldTotal = risk + phMort;
+
+    // New approach: Phoenix risk + AIG (after 20% discount)
+    var a1 = (aig1Before[y] || 0) * DISCOUNT * 12;
+    var a2 = (aig2Before[y] || 0) * DISCOUNT * 12;
+    var aigMort = a1 + a2;
+    // Before AIG started (2024-2025), new approach = old approach
+    var newTotal = (y < 2026) ? oldTotal : risk + aigMort;
+
+    cumOld += oldTotal;
+    cumNew += newTotal;
+
+    var oldVal = oldTotal ? '₪' + fmt(oldTotal) : '—';
+    var newVal = newTotal ? '₪' + fmt(newTotal) : '—';
 
     var diffStr = '—';
     var diffCls = '';
-    if (ph && aigTotal) {
-      var diff = aigAnnual - phAnnual;
+    if (oldTotal && newTotal && y >= 2026) {
+      var diff = newTotal - oldTotal;
       if (diff > 0) {
         diffStr = '+₪' + fmt(diff);
         diffCls = 'col-diff-negative';
-      } else {
+      } else if (diff < 0) {
         diffStr = '−₪' + fmt(Math.abs(diff));
         diffCls = 'col-diff-positive';
+      } else {
+        diffStr = '₪0';
       }
     }
 
     var cls = (y === 2026) ? ' class="year-highlight"' : '';
     html += '<tr' + cls + '>';
     html += '<td><strong>' + y + '</strong></td>';
-    html += '<td class="col-phoenix">' + phVal + '</td>';
-    html += '<td class="col-aig1">' + aigVal + '</td>';
+    html += '<td class="col-phoenix">' + oldVal + '</td>';
+    html += '<td class="col-aig1">' + newVal + '</td>';
     html += '<td class="' + diffCls + '">' + diffStr + '</td>';
     html += '</tr>';
   }
@@ -361,14 +322,14 @@ function buildMortgageTable() {
   // Summary row
   html += '<tr class="summary-row">';
   html += '<td>סה"כ לכל התקופה</td>';
-  html += '<td>₪' + fmt(cumPhoenix) + '</td>';
-  html += '<td>₪' + fmt(cumAig) + '</td>';
-  var totalDiff = cumAig - cumPhoenix;
+  html += '<td>₪' + fmt(cumOld) + '</td>';
+  html += '<td>₪' + fmt(cumNew) + '</td>';
+  var totalDiff = cumNew - cumOld;
   html += '<td>' + (totalDiff > 0 ? '+' : '−') + '₪' + fmt(Math.abs(totalDiff)) + '</td>';
   html += '</tr>';
 
   html += '</tbody></table>';
-  document.getElementById('mortgage-table').innerHTML = html;
+  document.getElementById('combined-table').innerHTML = html;
 }
 </script>
 
