@@ -115,17 +115,23 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
   <h2>מה כולל כל מסלול?</h2>
 
   <div class="coverage-note">
-    <strong>שיטה ישנה — הפניקס בלבד:</strong>
+    <strong>חלופה 1 — הפניקס בלבד:</strong>
     ריסק רגיל (2814174088): צבי ₪1.2M + מיכל ₪1M<br>
     + משכנתא (3109874085): ₪1.35M משותף לשניהם (תשלום אחד במקרה פטירה)<br>
     <strong>סה"כ כיסוי: ₪3.55M</strong> | עד 2048
   </div>
 
   <div class="coverage-note" style="background: #eef6fe; border-color: #2980b9;">
-    <strong>שיטה חדשה — הפניקס ריסק + AIG משכנתא:</strong>
+    <strong>חלופה 2 — הפניקס ריסק + AIG משכנתא:</strong>
     ריסק רגיל (2814174088): צבי ₪1.2M + מיכל ₪1M — <em>נשאר כמו שהוא</em><br>
-    + AIG משכנתא: ₪1.35M יורד + ₪1M קבוע = <strong>₪2.35M לכל מבוטח בנפרד</strong> (הנחה 20%)<br>
+    + AIG משכנתא: ₪1.35M יורד + ₪1M קבוע = <strong>₪2.35M לכל מבוטח בנפרד</strong><br>
     <strong>סה"כ כיסוי: ₪4.55M+</strong> | עד 2055
+  </div>
+
+  <div class="coverage-note" style="background: #fff3cd; border-color: #ffc107;">
+    <strong>הנחות מגולמות בנתונים:</strong>
+    <strong>הפניקס ריסק (2814174088):</strong> הנחה יורדת — 60% (2024-2025), 50% (2026), 40% (2027), 30% (2028), 20% (2029), <strong>0% מ-2030</strong>. המחירים בטבלה כוללים הנחה זו.<br>
+    <strong>AIG משכנתא (70080260326 + 70080262326):</strong> הנחת פיני 20% קבועה. המחירים בטבלה כוללים הנחה זו.
   </div>
 </div>
 
@@ -134,12 +140,12 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 <!-- ======================== -->
 <div class="section">
   <h2>השוואה מנורמלת — השורה התחתונה</h2>
-  <p class="section-sub">עלות שנתית מנורמלת לאותו סכום כיסוי (₪4.55M) — הפניקס ×1.28 מול שיטה חדשה</p>
+  <p class="section-sub">עלות שנתית מנורמלת לאותו סכום כיסוי (₪4.55M) — חלופה 1 ×1.28 מול חלופה 2</p>
 
   <div class="coverage-note">
     <strong>למה צריך נרמול?</strong>
-    הפניקס מכסה ₪3.55M | AIG מכסה ₪4.55M+ — כיסוי שונה, מחיר שונה.<br>
-    כדי להשוות הוגן, מכפילים את עלות הפניקס ב-×1.28 (4.55÷3.55) כאילו מכסה את אותו סכום כמו AIG.
+    חלופה 1 מכסה ₪3.55M | חלופה 2 מכסה ₪4.55M+ — כיסוי שונה, מחיר שונה.<br>
+    כדי להשוות הוגן, מכפילים את עלות חלופה 1 ב-×1.28 (4.55÷3.55) כאילו מכסה את אותו סכום כמו חלופה 2.
   </div>
 
   <div class="table-wrap" id="normalized-table"></div>
@@ -263,7 +269,12 @@ var aig1Sum = {
   2051: 270961, 2052: 212202, 2053: 151957, 2054: 90188, 2055: 26858
 };
 
-var DISCOUNT = 0.8; // 20% life discount
+var DISCOUNT = 0.8; // 20% life discount (Pini)
+
+// Phoenix risk discount schedule (from PDF page 4-5)
+var riskDiscount = {
+  2024: '60%', 2025: '60%', 2026: '50%', 2027: '40%', 2028: '30%', 2029: '20%'
+};
 
 function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
 
@@ -316,8 +327,8 @@ function buildNormalizedTable() {
   var html = '<table>';
   html += '<thead><tr>';
   html += '<th>שנה</th>';
-  html += '<th style="background:#c0792a;">הפניקס ×1.28</th>';
-  html += '<th style="background:#1a6baa;">ריסק + AIG</th>';
+  html += '<th style="background:#c0792a;">חלופה 1 ×1.28</th>';
+  html += '<th style="background:#1a6baa;">חלופה 2</th>';
   html += '<th style="background:#444;">הפרש</th>';
   html += '</tr></thead><tbody>';
 
@@ -351,15 +362,15 @@ function buildFullTable() {
   // Two-row header
   html += '<tr>';
   html += '<th rowspan="2">שנה</th>';
-  html += '<th colspan="3" style="background:#c0792a;text-align:center;">שיטה ישנה — הפניקס</th>';
-  html += '<th colspan="3" style="background:#1a6baa;text-align:center;">שיטה חדשה — ריסק + AIG</th>';
+  html += '<th colspan="3" style="background:#c0792a;text-align:center;">חלופה 1 — הפניקס</th>';
+  html += '<th colspan="3" style="background:#1a6baa;text-align:center;">חלופה 2 — ריסק + AIG</th>';
   html += '<th colspan="2" style="background:#444;text-align:center;">הפרש</th>';
   html += '</tr><tr>';
   html += '<th style="background:#d4943a;">ריסק</th>';
   html += '<th style="background:#d4943a;">משכנתא</th>';
   html += '<th style="background:#c0792a;">סה"כ</th>';
   html += '<th style="background:#2a7fc0;">ריסק</th>';
-  html += '<th style="background:#2a7fc0;">AIG משכנתא</th>';
+  html += '<th style="background:#2a7fc0;">AIG משכנתא<br><span style="font-size:10px;font-weight:400;">(הנחה 20%)</span></th>';
   html += '<th style="background:#1a6baa;">סה"כ</th>';
   html += '<th style="background:#555;">לפני נרמול</th>';
   html += '<th style="background:#333;">אחרי נרמול<br>(×1.28)</th>';
@@ -374,8 +385,10 @@ function buildFullTable() {
     var cls = (y === 2026) ? ' class="year-highlight"' : '';
     html += '<tr' + cls + '>';
     html += '<td><strong>' + y + '</strong></td>';
-    // Old: risk, mortgage, total
-    html += '<td class="col-phoenix">' + (d.risk ? '₪'+fmt(d.risk) : '—') + '</td>';
+    // Old: risk (with discount annotation), mortgage, total
+    var riskLabel = d.risk ? '₪'+fmt(d.risk) : '—';
+    if (riskDiscount[y]) riskLabel += ' <span style="font-size:11px;color:#856404;">(הנחה '+riskDiscount[y]+')</span>';
+    html += '<td class="col-phoenix">' + riskLabel + '</td>';
     html += '<td class="col-phoenix">' + (d.phMort ? '₪'+fmt(d.phMort) : '—') + '</td>';
     html += '<td class="col-phoenix" style="font-weight:600;">' + (d.oldRaw ? '₪'+fmt(d.oldRaw) : '—') + '</td>';
     // New: risk, AIG, total
