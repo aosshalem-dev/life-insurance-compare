@@ -56,10 +56,7 @@ tr.year-highlight td { background: #fff8e1; font-weight: 600; }
 /* Summary row */
 tr.summary-row td { background: #1a1a2e !important; color: #fff; font-weight: 700; font-size: 15px; border: none; }
 
-/* Tabs */
-.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 10px 10px 0 0; overflow: hidden; }
-.tab-bar button { flex: 1; padding: 12px; border: none; background: #e0e0e0; color: #666; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.tab-bar button.active { background: #0f3460; color: #fff; }
+/* (tabs removed) */
 
 /* Coverage note */
 .coverage-note { background: #e8f4fd; border: 1px solid #b3d7f0; border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.7; }
@@ -141,33 +138,24 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 
   <div class="coverage-note">
     <strong>הבדל חשוב בכיסוי:</strong>
-    הפניקס — פוליסה אחת, סכום ₪1,350,000 משותף לשני המבוטחים (משולם פעם אחת).<br>
-    AIG — שתי פוליסות נפרדות: ₪1,350,000 יורד + ₪1,000,000 קבוע. <strong>כל מבוטח מכוסה בנפרד</strong> (סה"כ ₪2,350,000 לכל אחד).<br>
+    הפניקס — פוליסה אחת, סכום <strong>₪1,350,000</strong> משותף לשני המבוטחים (משולם פעם אחת במקרה פטירה).<br>
+    AIG — שתי פוליסות: ₪1,350,000 יורד + ₪1,000,000 קבוע = <strong>₪2,350,000 לכל מבוטח בנפרד</strong>.<br>
     הנחה 20% על AIG עד סוף התקופה.
   </div>
 
   <div class="info-grid">
     <div class="info-card" style="border-right: 4px solid #e67e22;">
       <div class="label">הפניקס 3109874085</div>
-      <div class="value">₪1,350,000 יורד</div>
+      <div class="value">₪1,350,000</div>
       <div class="detail">משותף לצבי ומיכל | 06/2025–06/2055</div>
     </div>
     <div class="info-card" style="border-right: 4px solid #2980b9;">
-      <div class="label">AIG 70080260326</div>
-      <div class="value">₪1,350,000 יורד</div>
-      <div class="detail">כל מבוטח בנפרד | 01/2026–05/2055</div>
-    </div>
-    <div class="info-card" style="border-right: 4px solid #27ae60;">
-      <div class="label">AIG 70080262326</div>
-      <div class="value">₪1,000,000 קבוע</div>
-      <div class="detail">כל מבוטח בנפרד | 02/2026–01/2055</div>
+      <div class="label">AIG (שתי פוליסות)</div>
+      <div class="value">₪2,350,000 לכל מבוטח</div>
+      <div class="detail">70080260326 (1.35M יורד) + 70080262326 (1M קבוע) | 01/2026–2055</div>
     </div>
   </div>
 
-  <div class="tab-bar">
-    <button class="active" onclick="showTab('monthly')">פרמיה חודשית</button>
-    <button onclick="showTab('annual')">פרמיה שנתית</button>
-  </div>
   <div class="table-wrap" id="mortgage-table"></div>
 </div>
 
@@ -282,18 +270,6 @@ var aig1Sum = {
 var DISCOUNT = 0.8; // 20% discount
 
 function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
-function fmt2(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
-
-var currentTab = 'monthly';
-
-function showTab(tab) {
-  currentTab = tab;
-  var buttons = document.querySelectorAll('.tab-bar button');
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].className = buttons[i].textContent.indexOf(tab === 'monthly' ? 'חודשית' : 'שנתית') >= 0 ? 'active' : '';
-  }
-  buildMortgageTable();
-}
 
 function buildTables() {
   buildRiskTable();
@@ -302,7 +278,7 @@ function buildTables() {
 
 function buildRiskTable() {
   var html = '<table>';
-  html += '<thead><tr><th>שנה</th><th>פרמיה חודשית</th><th>פרמיה שנתית</th><th>סה"כ מצטבר</th></tr></thead>';
+  html += '<thead><tr><th>שנה</th><th>פרמיה שנתית</th><th>סה"כ מצטבר</th></tr></thead>';
   html += '<tbody>';
   var cumulative = 0;
   for (var i = 0; i < riskData.length; i++) {
@@ -312,24 +288,18 @@ function buildRiskTable() {
     var cls = (d.year === 2026) ? ' class="year-highlight"' : '';
     html += '<tr' + cls + '>';
     html += '<td><strong>' + d.year + '</strong></td>';
-    html += '<td>₪' + fmt2(d.monthly) + '</td>';
     html += '<td>₪' + fmt(annual) + '</td>';
     html += '<td>₪' + fmt(cumulative) + '</td>';
     html += '</tr>';
   }
-  // Summary
   var totalAll = 0;
   for (var i = 0; i < riskData.length; i++) totalAll += riskData[i].monthly * 12;
-  html += '<tr class="summary-row"><td>סה"כ לכל התקופה</td><td></td><td></td><td>₪' + fmt(totalAll) + '</td></tr>';
+  html += '<tr class="summary-row"><td>סה"כ לכל התקופה</td><td></td><td>₪' + fmt(totalAll) + '</td></tr>';
   html += '</tbody></table>';
   document.getElementById('risk-table').innerHTML = html;
 }
 
 function buildMortgageTable() {
-  var isMonthly = (currentTab === 'monthly');
-  var multi = isMonthly ? 1 : 12;
-  var label = isMonthly ? 'חודשית' : 'שנתית';
-
   // Collect all years
   var years = [];
   var allKeys = Object.keys(phoenixMortgage).concat(Object.keys(aig1Before)).concat(Object.keys(aig2Before));
@@ -343,11 +313,9 @@ function buildMortgageTable() {
   var html = '<table>';
   html += '<thead><tr>';
   html += '<th>שנה</th>';
-  html += '<th style="background:#c0792a;">הפניקס<br>' + label + '</th>';
-  html += '<th style="background:#1a6baa;">AIG #1<br>1.35M יורד<br>' + label + '</th>';
-  html += '<th style="background:#1a8a3a;">AIG #2<br>1M קבוע<br>' + label + '</th>';
-  html += '<th style="background:#8a1a3a;">AIG סה"כ<br>' + label + '</th>';
-  html += '<th style="background:#444;">הפרש<br>AIG − הפניקס</th>';
+  html += '<th style="background:#c0792a;">הפניקס<br>שנתי</th>';
+  html += '<th style="background:#1a6baa;">AIG<br>שנתי</th>';
+  html += '<th style="background:#444;">הפרש</th>';
   html += '</tr></thead>';
   html += '<tbody>';
 
@@ -359,49 +327,41 @@ function buildMortgageTable() {
     var a1 = (aig1Before[y] || 0) * DISCOUNT;
     var a2 = (aig2Before[y] || 0) * DISCOUNT;
     var aigTotal = a1 + a2;
-    var diff = aigTotal - ph;
 
-    cumPhoenix += ph * 12;
-    cumAig += aigTotal * 12;
+    var phAnnual = ph * 12;
+    var aigAnnual = aigTotal * 12;
+    cumPhoenix += phAnnual;
+    cumAig += aigAnnual;
 
-    var phVal = ph ? '₪' + fmt(ph * multi) : '—';
-    var a1Val = a1 ? '₪' + fmt(a1 * multi) : '—';
-    var a2Val = a2 ? '₪' + fmt(a2 * multi) : '—';
-    var aigVal = aigTotal ? '₪' + fmt(aigTotal * multi) : '—';
+    var phVal = ph ? '₪' + fmt(phAnnual) : '—';
+    var aigVal = aigTotal ? '₪' + fmt(aigAnnual) : '—';
 
-    var diffStr = '';
+    var diffStr = '—';
     var diffCls = '';
     if (ph && aigTotal) {
-      var diffVal = diff * multi;
-      if (diffVal > 0) {
-        diffStr = '+₪' + fmt(diffVal);
+      var diff = aigAnnual - phAnnual;
+      if (diff > 0) {
+        diffStr = '+₪' + fmt(diff);
         diffCls = 'col-diff-negative';
       } else {
-        diffStr = '−₪' + fmt(Math.abs(diffVal));
+        diffStr = '−₪' + fmt(Math.abs(diff));
         diffCls = 'col-diff-positive';
       }
-    } else if (aigTotal && !ph) {
-      diffStr = '—';
-    } else {
-      diffStr = '—';
     }
 
     var cls = (y === 2026) ? ' class="year-highlight"' : '';
     html += '<tr' + cls + '>';
     html += '<td><strong>' + y + '</strong></td>';
     html += '<td class="col-phoenix">' + phVal + '</td>';
-    html += '<td class="col-aig1">' + a1Val + '</td>';
-    html += '<td class="col-aig2">' + a2Val + '</td>';
-    html += '<td class="col-total">' + aigVal + '</td>';
+    html += '<td class="col-aig1">' + aigVal + '</td>';
     html += '<td class="' + diffCls + '">' + diffStr + '</td>';
     html += '</tr>';
   }
 
   // Summary row
   html += '<tr class="summary-row">';
-  html += '<td>סה"כ מצטבר</td>';
+  html += '<td>סה"כ לכל התקופה</td>';
   html += '<td>₪' + fmt(cumPhoenix) + '</td>';
-  html += '<td></td><td></td>';
   html += '<td>₪' + fmt(cumAig) + '</td>';
   var totalDiff = cumAig - cumPhoenix;
   html += '<td>' + (totalDiff > 0 ? '+' : '−') + '₪' + fmt(Math.abs(totalDiff)) + '</td>';
