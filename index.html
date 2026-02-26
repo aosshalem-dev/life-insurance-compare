@@ -22,69 +22,63 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
 /* Main content */
 #content { display: none; }
 header { background: linear-gradient(135deg, #1a1a2e, #0f3460); color: #fff; padding: 32px 24px; text-align: center; }
-header h1 { font-size: 26px; margin-bottom: 4px; }
+header h1 { font-size: 24px; margin-bottom: 4px; }
 header p { opacity: 0.8; font-size: 14px; }
 .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
 
-/* Status badges */
-.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-.badge-active { background: #d4edda; color: #155724; }
-.badge-cancel { background: #f8d7da; color: #721c24; }
-.badge-new { background: #cce5ff; color: #004085; }
-.badge-pending { background: #fff3cd; color: #856404; }
+/* Section headings */
+.section { margin-bottom: 40px; }
+.section h2 { font-size: 20px; margin-bottom: 6px; padding-bottom: 8px; border-bottom: 3px solid #0f3460; color: #0f3460; }
+.section-sub { font-size: 14px; color: #666; margin-bottom: 16px; }
 
-/* Summary cards */
-.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
-.summary-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-right: 4px solid #0f3460; }
-.summary-card h3 { font-size: 14px; color: #666; margin-bottom: 4px; }
-.summary-card .amount { font-size: 28px; font-weight: 700; color: #1a1a2e; }
-.summary-card .sub { font-size: 13px; color: #888; margin-top: 4px; }
-
-/* Policy cards */
-.policy-section { margin-bottom: 32px; }
-.policy-section h2 { font-size: 20px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #0f3460; }
-.policy-card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-.policy-card h3 { font-size: 18px; color: #0f3460; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.policy-card .logo { font-size: 12px; background: #eee; padding: 2px 8px; border-radius: 4px; color: #666; }
+/* Info grid */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.info-card { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.info-card .label { font-size: 12px; color: #888; margin-bottom: 2px; }
+.info-card .value { font-size: 16px; font-weight: 600; color: #1a1a2e; }
+.info-card .detail { font-size: 13px; color: #666; margin-top: 4px; }
 
 /* Tables */
-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
-th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid #eee; }
-th { background: #f8f9fa; font-weight: 600; color: #444; white-space: nowrap; }
-td { color: #333; }
-tr:hover td { background: #f8f9fa; }
-.highlight { background: #fff3cd !important; }
-.danger { color: #dc3545; font-weight: 600; }
-.success { color: #28a745; font-weight: 600; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; }
+th, td { padding: 10px 14px; text-align: right; white-space: nowrap; }
+th { background: #0f3460; color: #fff; font-weight: 600; position: sticky; top: 0; }
+td { border-bottom: 1px solid #eee; }
+tr:hover td { background: #f0f4ff; }
+tr.year-highlight td { background: #fff8e1; font-weight: 600; }
+.col-phoenix { background: #fef6ee; }
+.col-aig1 { background: #eef6fe; }
+.col-aig2 { background: #eefef0; }
+.col-total { background: #feeef0; }
+.col-diff-positive { color: #28a745; font-weight: 600; }
+.col-diff-negative { color: #dc3545; font-weight: 600; }
 
-/* Comparison table */
-.compare-table { overflow-x: auto; }
-.compare-table table { min-width: 800px; }
-.compare-table th:first-child { width: 200px; }
-.col-phoenix { background: #fff8f0; }
-.col-aig { background: #f0f8ff; }
+/* Summary row */
+tr.summary-row td { background: #1a1a2e !important; color: #fff; font-weight: 700; font-size: 15px; border: none; }
+
+/* Tabs */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 10px 10px 0 0; overflow: hidden; }
+.tab-bar button { flex: 1; padding: 12px; border: none; background: #e0e0e0; color: #666; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.tab-bar button.active { background: #0f3460; color: #fff; }
+
+/* Coverage note */
+.coverage-note { background: #e8f4fd; border: 1px solid #b3d7f0; border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.7; }
+.coverage-note strong { display: block; margin-bottom: 4px; color: #0f3460; }
 
 /* PDF links */
-.pdf-list { list-style: none; padding: 0; }
-.pdf-list li { margin: 8px 0; }
-.pdf-list a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #f8f9fa; border-radius: 8px; color: #0f3460; text-decoration: none; font-size: 14px; transition: background 0.2s; }
-.pdf-list a:hover { background: #e8eef5; }
-
-/* Notes */
-.note-box { background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px; padding: 16px; margin: 16px 0; font-size: 14px; }
-.note-box.danger { background: #f8d7da; border-color: #dc3545; }
-.note-box.info { background: #cce5ff; border-color: #0d6efd; }
-.note-box strong { display: block; margin-bottom: 4px; }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .summary-card .amount { font-size: 22px; }
-  table { font-size: 13px; }
-  th, td { padding: 8px 10px; }
-  header h1 { font-size: 20px; }
-}
+.pdf-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+.pdf-list li a { display: block; padding: 12px 16px; background: #fff; border-radius: 8px; color: #0f3460; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: all 0.2s; }
+.pdf-list li a:hover { background: #eef3fa; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.pdf-list li a::before { content: "📄 "; }
 
 footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border-top: 1px solid #eee; margin-top: 40px; }
+
+@media (max-width: 600px) {
+  table { font-size: 13px; }
+  th, td { padding: 8px 10px; }
+  header h1 { font-size: 18px; }
+  .info-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -100,375 +94,100 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
   </div>
 </div>
 
-<!-- Main Content (hidden until password) -->
+<!-- Main Content -->
 <div id="content">
 
 <header>
   <h1>השוואת ביטוחי חיים — משפחת שלם</h1>
-  <p>עדכון אחרון: פברואר 2026 | נתונים מפוליסות בפועל</p>
+  <p>מחירים שנתיים לפי פוליסות בפועל | פברואר 2026</p>
 </header>
 
 <div class="container">
 
-<!-- Summary Cards -->
-<div class="summary-grid">
-  <div class="summary-card">
-    <h3>סה"כ פרמיה חודשית (ישן)</h3>
-    <div class="amount danger">₪385</div>
-    <div class="sub">הפניקס ריסק ₪219 + הפניקס משכנתא ₪166</div>
-  </div>
-  <div class="summary-card">
-    <h3>סה"כ פרמיה חודשית (AIG חדש)</h3>
-    <div class="amount">₪385</div>
-    <div class="sub">70080260326: ₪221 + 70080262326: ₪164</div>
-  </div>
-  <div class="summary-card">
-    <h3>סה"כ כיסוי (ישן)</h3>
-    <div class="amount">₪3.55M</div>
-    <div class="sub">ריסק: צבי 1.2M + מיכל 1M | משכנתא: 1.35M</div>
-  </div>
-  <div class="summary-card">
-    <h3>סה"כ כיסוי (AIG חדש)</h3>
-    <div class="amount">₪4.7M</div>
-    <div class="sub">משכנתא 1: 2×1.35M | משכנתא 2: 2×1M</div>
-  </div>
-</div>
+<!-- ======================== -->
+<!-- Section 1: Regular Life  -->
+<!-- ======================== -->
+<div class="section">
+  <h2>ביטוח חיים רגיל (ריסק)</h2>
+  <p class="section-sub">הפניקס — פוליסה 2814174088</p>
 
-<div class="note-box danger">
-  <strong>תשלום כפול!</strong>
-  כרגע משלמים גם על הפוליסות הישנות וגם על AIG. יש לבטל את הפניקס משכנתא (3109874085) בהקדם. ריסק 1 (2814174088) לא מוחלף — נשאר פעיל.
-</div>
-
-<!-- Comparison Table -->
-<div class="policy-section">
-  <h2>טבלת השוואה מלאה</h2>
-  <div class="compare-table">
-    <table>
-      <thead>
-        <tr>
-          <th>פרט</th>
-          <th class="col-phoenix">הפניקס ריסק<br>2814174088</th>
-          <th class="col-phoenix">הפניקס משכנתא<br>3109874085</th>
-          <th class="col-aig">AIG משכנתא #1<br>70080260326</th>
-          <th class="col-aig">AIG משכנתא #2<br>70080262326</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>סטטוס</strong></td>
-          <td class="col-phoenix"><span class="badge badge-active">פעיל — נשאר</span></td>
-          <td class="col-phoenix"><span class="badge badge-cancel">לביטול</span></td>
-          <td class="col-aig"><span class="badge badge-new">חדש — לא נחתם</span></td>
-          <td class="col-aig"><span class="badge badge-new">חדש — לא נחתם</span></td>
-        </tr>
-        <tr>
-          <td><strong>חברה</strong></td>
-          <td class="col-phoenix">הפניקס</td>
-          <td class="col-phoenix">הפניקס</td>
-          <td class="col-aig">AIG ישראל</td>
-          <td class="col-aig">AIG ישראל</td>
-        </tr>
-        <tr>
-          <td><strong>סוג</strong></td>
-          <td class="col-phoenix">ריסק (חיים טהור)</td>
-          <td class="col-phoenix">ריסק משכנתא</td>
-          <td class="col-aig">ריסק משכנתא (יורד)</td>
-          <td class="col-aig">ריסק משכנתא (קבוע)</td>
-        </tr>
-        <tr>
-          <td><strong>סוכן</strong></td>
-          <td class="col-phoenix">דוידוב</td>
-          <td class="col-phoenix">דוידוב</td>
-          <td class="col-aig">גפנר (פיני)</td>
-          <td class="col-aig">גפנר (פיני)</td>
-        </tr>
-        <tr>
-          <td><strong>תחילה</strong></td>
-          <td class="col-phoenix">01/02/2024</td>
-          <td class="col-phoenix">01/06/2025</td>
-          <td class="col-aig">14/01/2026</td>
-          <td class="col-aig">14/02/2026</td>
-        </tr>
-        <tr>
-          <td><strong>סיום</strong></td>
-          <td class="col-phoenix">02/2054</td>
-          <td class="col-phoenix">06/2055</td>
-          <td class="col-aig">05/2055</td>
-          <td class="col-aig">01/2055</td>
-        </tr>
-        <tr>
-          <td><strong>תקופה</strong></td>
-          <td class="col-phoenix">30 שנה</td>
-          <td class="col-phoenix">30 שנה</td>
-          <td class="col-aig">29 שנה</td>
-          <td class="col-aig">29 שנה</td>
-        </tr>
-        <tr>
-          <td><strong>נכס ממושכן</strong></td>
-          <td class="col-phoenix">—</td>
-          <td class="col-phoenix">כרמיאל</td>
-          <td class="col-aig">כרמיאל (מנה ראשית)</td>
-          <td class="col-aig">כרמיאל (מנה שנייה)</td>
-        </tr>
-        <tr class="highlight">
-          <td><strong>סכום ביטוח — צבי</strong></td>
-          <td class="col-phoenix">₪1,200,000</td>
-          <td class="col-phoenix">₪1,350,000</td>
-          <td class="col-aig">₪1,350,000</td>
-          <td class="col-aig">₪1,000,000</td>
-        </tr>
-        <tr class="highlight">
-          <td><strong>סכום ביטוח — מיכל</strong></td>
-          <td class="col-phoenix">₪1,000,000</td>
-          <td class="col-phoenix">₪1,350,000</td>
-          <td class="col-aig">₪1,350,000</td>
-          <td class="col-aig">₪1,000,000</td>
-        </tr>
-        <tr>
-          <td><strong>סה"כ כיסוי</strong></td>
-          <td class="col-phoenix">₪2,200,000</td>
-          <td class="col-phoenix">₪1,350,000*</td>
-          <td class="col-aig">₪2,700,000</td>
-          <td class="col-aig">₪2,000,000</td>
-        </tr>
-        <tr>
-          <td><strong>פרמיה צבי (חודשי)</strong></td>
-          <td class="col-phoenix">₪58 (שנתי ₪696)</td>
-          <td class="col-phoenix">₪67.5 (שנתי ₪810)</td>
-          <td class="col-aig">₪106.19</td>
-          <td class="col-aig">₪78.66</td>
-        </tr>
-        <tr>
-          <td><strong>פרמיה מיכל (חודשי)</strong></td>
-          <td class="col-phoenix">₪76.7 (שנתי ₪920)</td>
-          <td class="col-phoenix">₪98.5</td>
-          <td class="col-aig">₪170.72</td>
-          <td class="col-aig">₪126.46</td>
-        </tr>
-        <tr class="highlight">
-          <td><strong>סה"כ פרמיה חודשית</strong></td>
-          <td class="col-phoenix"><strong>₪134.7</strong><br>(שנתי ₪1,616)</td>
-          <td class="col-phoenix"><strong>₪166</strong><br>(שנתי ₪1,957)</td>
-          <td class="col-aig"><strong>₪276.91</strong><br>(לפני הנחה)</td>
-          <td class="col-aig"><strong>₪205.12</strong><br>(לפני הנחה)</td>
-        </tr>
-        <tr class="highlight">
-          <td><strong>פרמיה אחרי הנחת 20%</strong></td>
-          <td class="col-phoenix">—</td>
-          <td class="col-phoenix">—</td>
-          <td class="col-aig"><strong class="success">₪221</strong></td>
-          <td class="col-aig"><strong class="success">₪164</strong></td>
-        </tr>
-        <tr>
-          <td><strong>הנחה</strong></td>
-          <td class="col-phoenix">יש הטבות (לפי טבלה)</td>
-          <td class="col-phoenix">100% הטבה (לפי טבלה)</td>
-          <td class="col-aig">20% הנחת מבצע</td>
-          <td class="col-aig">20% הנחת מבצע</td>
-        </tr>
-        <tr>
-          <td><strong>סיום הנחה</strong></td>
-          <td class="col-phoenix">לפי תנאי פוליסה</td>
-          <td class="col-phoenix">לפי תנאי פוליסה</td>
-          <td class="col-aig">06/2055</td>
-          <td class="col-aig">02/2055</td>
-        </tr>
-        <tr>
-          <td><strong>מוטב בלתי חוזר</strong></td>
-          <td class="col-phoenix">—</td>
-          <td class="col-phoenix">בנק הפועלים</td>
-          <td class="col-aig">בנק הפועלים (ראשי)</td>
-          <td class="col-aig">בנק הפועלים (ראשי)</td>
-        </tr>
-        <tr>
-          <td><strong>הקדמת תגמולים (מחלה סופנית)</strong></td>
-          <td class="col-phoenix">—</td>
-          <td class="col-phoenix">—</td>
-          <td class="col-aig">50% מסכום הביטוח</td>
-          <td class="col-aig">50% מסכום הביטוח</td>
-        </tr>
-        <tr>
-          <td><strong>מספר הלוואה</strong></td>
-          <td class="col-phoenix">—</td>
-          <td class="col-phoenix">רשום</td>
-          <td class="col-aig"><span class="danger">ריק — להשלים!</span></td>
-          <td class="col-aig"><span class="danger">ריק — להשלים!</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12px;color:#888;margin-top:8px;">* בפוליסת משכנתא, סכום הביטוח משותף לשני המבוטחים (משולם פעם אחת במקרה מוות של מי מהם)</p>
-</div>
-
-<!-- Detailed Policy Cards -->
-<div class="policy-section">
-  <h2>פירוט פוליסות</h2>
-
-  <!-- Phoenix Risk -->
-  <div class="policy-card">
-    <h3>
-      <span class="logo">הפניקס</span>
-      ריסק 1 — פוליסה 2814174088
-      <span class="badge badge-active">פעיל — נשאר</span>
-    </h3>
-    <table>
-      <tr><td><strong>סוג</strong></td><td>ריסק יסודי (חיים טהור, לא קשור למשכנתא)</td></tr>
-      <tr><td><strong>בעל הפוליסה</strong></td><td>שלם צבי (ת.ז. 031488752)</td></tr>
-      <tr><td><strong>מבוטח ראשי</strong></td><td>שלם צבי — מרצה במוסד להשכלה גבוהה (חוקר), גיל כניסה 45</td></tr>
-      <tr><td><strong>מבוטח משני</strong></td><td>צבעוני שלם מיכל — מטפל אלטרנטיבי, גיל כניסה 46</td></tr>
-      <tr><td><strong>תחילה</strong></td><td>01/02/2024</td></tr>
-      <tr><td><strong>סכום ביטוח יסודי</strong></td><td>₪1,200,000</td></tr>
-      <tr><td><strong>כיסויי צבי</strong></td><td>ריסק יסודי בפרמיה משתנה (7700) — שנתי ₪696 | ריסק גמיש (8888)</td></tr>
-      <tr><td><strong>כיסויי מיכל</strong></td><td>ריסק בפרמיה משתנה (7702-1) סכום ₪1,000,000 — שנתי ₪920 | ריסק גמיש (8889-1)</td></tr>
-      <tr><td><strong>סה"כ שנתי</strong></td><td>₪1,616 (~₪134.7/חודש)</td></tr>
-      <tr><td><strong>פרמיה מהפורטל (02/2026)</strong></td><td>₪219.1/חודש</td></tr>
-      <tr><td><strong>סוכן</strong></td><td>דוידוב סוכנות לביטוח, 03-7309020</td></tr>
-    </table>
-    <div class="note-box info">
-      <strong>הערה:</strong> פוליסה זו לא מוחלפת ע"י AIG. נשארת פעילה. הפרמיה מהפורטל (₪219.1) גבוהה מהמחושב (₪134.7) — ייתכן שהפרמיה עלתה לפי טבלת ההשתנות.
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">מבוטחים</div>
+      <div class="value">צבי + מיכל</div>
+      <div class="detail">צבי: ₪1,200,000 | מיכל: ₪1,000,000</div>
+    </div>
+    <div class="info-card">
+      <div class="label">תקופה</div>
+      <div class="value">02/2024 — 02/2054</div>
+      <div class="detail">30 שנה</div>
+    </div>
+    <div class="info-card">
+      <div class="label">סוג פרמיה</div>
+      <div class="value">משתנה (עולה)</div>
+      <div class="detail">עם הנחה יורדת מ-60% עד 0%</div>
     </div>
   </div>
 
-  <!-- Phoenix Mortgage -->
-  <div class="policy-card">
-    <h3>
-      <span class="logo">הפניקס</span>
-      משכנתא — פוליסה 3109874085
-      <span class="badge badge-cancel">לביטול</span>
-    </h3>
-    <table>
-      <tr><td><strong>סוג</strong></td><td>ריסק משכנתא בפרמיה משתנה</td></tr>
-      <tr><td><strong>בעל הפוליסה</strong></td><td>צבעוני שלם מיכל (ת.ז. 034518076)</td></tr>
-      <tr><td><strong>מבוטח ראשי</strong></td><td>צבעוני שלם מיכל — מרפא/ה בעיסוק, גיל כניסה 47</td></tr>
-      <tr><td><strong>מבוטח משני</strong></td><td>שלם צבי — מרצה, גיל כניסה 46</td></tr>
-      <tr><td><strong>תחילה</strong></td><td>01/06/2025</td></tr>
-      <tr><td><strong>תום</strong></td><td>01/06/2055 (30 שנה)</td></tr>
-      <tr><td><strong>סכום ביטוח</strong></td><td>₪1,350,000</td></tr>
-      <tr><td><strong>כיסוי</strong></td><td>ריסק משכנתא (7704) — שנתי ₪1,215–₪1,377 | צבי: שנתי ₪742.50–₪810</td></tr>
-      <tr><td><strong>פרמיה חודשית</strong></td><td>₪166/חודש (עולה ל-₪235 בהמשך 2026)</td></tr>
-      <tr><td><strong>מוטב בלתי חוזר</strong></td><td>בנק הפועלים</td></tr>
-      <tr><td><strong>נכס</strong></td><td>כרמיאל (משכנתא בנק הפועלים)</td></tr>
-      <tr><td><strong>סוכן</strong></td><td>דוידוב סוכנות לביטוח, 03-7309020</td></tr>
-    </table>
-    <div class="note-box danger">
-      <strong>סטטוס ביטול:</strong> בקשת ביטול דרך הפורטל נחסמה — דרושה חתימת מיכל. נוצר מכתב ביטול PDF לחתימה ומשלוח לסוכן דוידוב. מוחלפת ע"י AIG 70080260326 (סכום כמעט זהה).
-    </div>
-  </div>
-
-  <!-- AIG Mortgage #1 -->
-  <div class="policy-card">
-    <h3>
-      <span class="logo">AIG</span>
-      משכנתא #1 — פוליסה 70080260326
-      <span class="badge badge-new">חדש — טרם נחתם</span>
-    </h3>
-    <table>
-      <tr><td><strong>סוג</strong></td><td>ביטוח חיים למשכנתא — סכום יורד (מנה ראשית)</td></tr>
-      <tr><td><strong>בעל הפוליסה</strong></td><td>שלם צבי (ת.ז. 031488752)</td></tr>
-      <tr><td><strong>מבוטח ראשון</strong></td><td>שלם צבי — DOB 22/11/1978</td></tr>
-      <tr><td><strong>מבוטח שני</strong></td><td>צבעוני מיכל — DOB 22/11/1977</td></tr>
-      <tr><td><strong>תחילה</strong></td><td>14/01/2026</td></tr>
-      <tr><td><strong>תום</strong></td><td>31/05/2055</td></tr>
-      <tr><td><strong>סכום ביטוח</strong></td><td>₪1,350,000 לכל מבוטח (מוות משכנתא)</td></tr>
-      <tr><td><strong>פרמיה צבי</strong></td><td>₪106.19/חודש</td></tr>
-      <tr><td><strong>פרמיה מיכל</strong></td><td>₪170.72/חודש</td></tr>
-      <tr><td><strong>סה"כ לפני הנחה</strong></td><td>₪276.91/חודש</td></tr>
-      <tr><td><strong>הנחת מבצע</strong></td><td>20% לשניהם (עד 06/2055)</td></tr>
-      <tr><td><strong>סה"כ אחרי הנחה</strong></td><td><strong>~₪221/חודש</strong></td></tr>
-      <tr><td><strong>מוטב בלתי חוזר</strong></td><td>בנק הפועלים — משרד ראשי, הנגב 11, ת"א</td></tr>
-      <tr><td><strong>הקדמת תגמולים</strong></td><td>50% מסכום הביטוח בגילוי מחלה סופנית</td></tr>
-      <tr><td><strong>מדד בסיס</strong></td><td>637.7486</td></tr>
-    </table>
-    <div class="note-box">
-      <strong>פעולות נדרשות לפני חתימה:</strong> מספר הלוואה וסניף בנק ריקים — יש למלא! כתובת תקינה (עת דודים 241).
-    </div>
-  </div>
-
-  <!-- AIG Mortgage #2 -->
-  <div class="policy-card">
-    <h3>
-      <span class="logo">AIG</span>
-      משכנתא #2 — פוליסה 70080262326
-      <span class="badge badge-new">חדש — טרם נחתם</span>
-    </h3>
-    <table>
-      <tr><td><strong>סוג</strong></td><td>ביטוח חיים למשכנתא — סכום קבוע (מנה שנייה)</td></tr>
-      <tr><td><strong>בעל הפוליסה</strong></td><td>שלם צבי (ת.ז. 031488752)</td></tr>
-      <tr><td><strong>מבוטח ראשון</strong></td><td>שלם צבי — DOB 22/11/1978</td></tr>
-      <tr><td><strong>מבוטח שני</strong></td><td>צבעוני מיכל — DOB 22/11/1977</td></tr>
-      <tr><td><strong>תחילה</strong></td><td>14/02/2026</td></tr>
-      <tr><td><strong>תום</strong></td><td>31/01/2055</td></tr>
-      <tr><td><strong>סכום ביטוח</strong></td><td>₪1,000,000 לכל מבוטח (מוות משכנתא)</td></tr>
-      <tr><td><strong>פרמיה צבי</strong></td><td>₪78.66/חודש</td></tr>
-      <tr><td><strong>פרמיה מיכל</strong></td><td>₪126.46/חודש</td></tr>
-      <tr><td><strong>סה"כ לפני הנחה</strong></td><td>₪205.12/חודש</td></tr>
-      <tr><td><strong>הנחת מבצע</strong></td><td>20% לשניהם (עד 02/2055)</td></tr>
-      <tr><td><strong>סה"כ אחרי הנחה</strong></td><td><strong>~₪164/חודש</strong></td></tr>
-      <tr><td><strong>מוטב בלתי חוזר</strong></td><td>בנק הפועלים — משרד ראשי, הנגב 11, ת"א</td></tr>
-      <tr><td><strong>הקדמת תגמולים</strong></td><td>50% מסכום הביטוח בגילוי מחלה סופנית</td></tr>
-      <tr><td><strong>מדד בסיס</strong></td><td>637.7486</td></tr>
-    </table>
-    <div class="note-box danger">
-      <strong>אזהרת הסלמת עלות!</strong> סכום קבוע (₪1M) על הלוואה קבועה — הפרמיה צפויה לעלות משמעותית עם הגיל. לפי CLAUDE.md הפרמיה מגיעה ל-₪3,329/חודש בשנת 2054. שווה לבדוק המרה לסכום יורד.
-    </div>
-    <div class="note-box">
-      <strong>פעולות נדרשות לפני חתימה:</strong> מספר הלוואה וסניף בנק ריקים — יש למלא! כתובת שגויה (מרבד הקסמים 9 — כתובת ישנה). צריך לעדכן לכרמיאל.
-    </div>
-  </div>
+  <div class="table-wrap" id="risk-table"></div>
 </div>
 
-<!-- What replaces what -->
-<div class="policy-section">
-  <h2>מה מחליף מה?</h2>
-  <table>
-    <thead>
-      <tr><th>ישן</th><th>פרמיה</th><th></th><th>חדש</th><th>פרמיה</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>הפניקס ריסק 2814174088</td>
-        <td>₪219/חודש</td>
-        <td><strong>נשאר</strong></td>
-        <td>—</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>הפניקס משכנתא 3109874085</td>
-        <td>₪166/חודש</td>
-        <td>→</td>
-        <td>AIG 70080260326 (1.35M יורד)</td>
-        <td>₪221/חודש</td>
-      </tr>
-      <tr>
-        <td>—</td>
-        <td>—</td>
-        <td>חדש</td>
-        <td>AIG 70080262326 (1M קבוע)</td>
-        <td>₪164/חודש</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="note-box info">
-    <strong>שינוי מבנה:</strong> הפניקס כיסה את המשכנתא בפוליסה אחת (₪1.35M). AIG מפצל לשתי פוליסות לפי מנות ההלוואה: מנה ראשית ₪1.35M (יורד) + מנה שנייה ₪1M (קבוע). סה"כ כיסוי AIG גבוה יותר (₪2.35M × 2 מבוטחים).
+<!-- ======================== -->
+<!-- Section 2: Mortgage Life -->
+<!-- ======================== -->
+<div class="section">
+  <h2>ביטוח חיים למשכנתא — השוואת מחירים</h2>
+  <p class="section-sub">הפניקס 3109874085 מול AIG 70080260326 + 70080262326</p>
+
+  <div class="coverage-note">
+    <strong>הבדל חשוב בכיסוי:</strong>
+    הפניקס — פוליסה אחת, סכום ₪1,350,000 משותף לשני המבוטחים (משולם פעם אחת).<br>
+    AIG — שתי פוליסות נפרדות: ₪1,350,000 יורד + ₪1,000,000 קבוע. <strong>כל מבוטח מכוסה בנפרד</strong> (סה"כ ₪2,350,000 לכל אחד).<br>
+    הנחה 20% על AIG עד סוף התקופה.
   </div>
+
+  <div class="info-grid">
+    <div class="info-card" style="border-right: 4px solid #e67e22;">
+      <div class="label">הפניקס 3109874085</div>
+      <div class="value">₪1,350,000 יורד</div>
+      <div class="detail">משותף לצבי ומיכל | 06/2025–06/2055</div>
+    </div>
+    <div class="info-card" style="border-right: 4px solid #2980b9;">
+      <div class="label">AIG 70080260326</div>
+      <div class="value">₪1,350,000 יורד</div>
+      <div class="detail">כל מבוטח בנפרד | 01/2026–05/2055</div>
+    </div>
+    <div class="info-card" style="border-right: 4px solid #27ae60;">
+      <div class="label">AIG 70080262326</div>
+      <div class="value">₪1,000,000 קבוע</div>
+      <div class="detail">כל מבוטח בנפרד | 02/2026–01/2055</div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="active" onclick="showTab('monthly')">פרמיה חודשית</button>
+    <button onclick="showTab('annual')">פרמיה שנתית</button>
+  </div>
+  <div class="table-wrap" id="mortgage-table"></div>
 </div>
 
-<!-- PDFs -->
-<div class="policy-section">
+<!-- ======================== -->
+<!-- PDFs                     -->
+<!-- ======================== -->
+<div class="section">
   <h2>מסמכי מקור (PDF)</h2>
   <ul class="pdf-list">
-    <li><a href="pdfs/phoenix_risk_2814174088.pdf" target="_blank">📄 הפניקס — ריסק 2814174088 (צבי ומיכל)</a></li>
-    <li><a href="pdfs/phoenix_mortgage_3109874085.pdf" target="_blank">📄 הפניקס — משכנתא 3109874085 (מיכל)</a></li>
-    <li><a href="pdfs/phoenix_mortgage_3109874085_copy2.pdf" target="_blank">📄 הפניקס — משכנתא 3109874085 (העתק נוסף)</a></li>
-    <li><a href="pdfs/ביטוח משכנתא-מפרט פוליסה 70080260326.pdf" target="_blank">📄 AIG — משכנתא #1 (70080260326, 1.35M יורד)</a></li>
-    <li><a href="pdfs/ביטוח משכנתא-מפרט פוליסה 70080262326.pdf" target="_blank">📄 AIG — משכנתא #2 (70080262326, 1M קבוע)</a></li>
+    <li><a href="pdfs/phoenix_risk_2814174088.pdf" target="_blank">הפניקס — ריסק 2814174088</a></li>
+    <li><a href="pdfs/phoenix_mortgage_3109874085.pdf" target="_blank">הפניקס — משכנתא 3109874085</a></li>
+    <li><a href="pdfs/%D7%91%D7%99%D7%98%D7%95%D7%97%20%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90-%D7%9E%D7%A4%D7%A8%D7%98%20%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94%2070080260326.pdf" target="_blank">AIG — משכנתא 70080260326 (1.35M יורד)</a></li>
+    <li><a href="pdfs/%D7%91%D7%99%D7%98%D7%95%D7%97%20%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90-%D7%9E%D7%A4%D7%A8%D7%98%20%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94%2070080262326.pdf" target="_blank">AIG — משכנתא 70080262326 (1M קבוע)</a></li>
   </ul>
 </div>
 
 </div><!-- container -->
 
 <footer>
-  נתונים חולצו מפוליסות בפועל (PDF) ומפורטלים אישיים | פברואר 2026
+  נתונים חולצו מפוליסות בפועל (PDF) | פברואר 2026
 </footer>
 
 </div><!-- content -->
@@ -479,6 +198,7 @@ function checkPw() {
   if (pw === '7654') {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('content').style.display = 'block';
+    buildTables();
   } else {
     document.getElementById('gate-error').style.display = 'block';
     document.getElementById('pw').value = '';
@@ -488,6 +208,208 @@ function checkPw() {
 document.getElementById('pw').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') checkPw();
 });
+
+/* ===== DATA ===== */
+
+// Phoenix Risk 2814174088 — combined monthly premium (both insureds)
+var riskData = [
+  {year: 2024, month: '09/2024', monthly: 134.62},
+  {year: 2025, month: '02/2025', monthly: 149.77},
+  {year: 2026, month: '02/2026', monthly: 206.76},
+  {year: 2027, month: '02/2027', monthly: 278.05},
+  {year: 2028, month: '02/2028', monthly: 361.69},
+  {year: 2029, month: '02/2029', monthly: 463.15},
+  {year: 2030, month: '02/2030', monthly: 647.24},
+  {year: 2031, month: '02/2031', monthly: 725.21},
+  {year: 2032, month: '02/2032', monthly: 812.84},
+  {year: 2033, month: '02/2033', monthly: 912.97},
+  {year: 2034, month: '02/2034', monthly: 1024.59},
+  {year: 2035, month: '02/2035', monthly: 1151.38},
+  {year: 2036, month: '02/2036', monthly: 1292.32},
+  {year: 2037, month: '02/2037', monthly: 1452.92},
+  {year: 2038, month: '02/2038', monthly: 1632.34},
+  {year: 2039, month: '02/2039', monthly: 1833.93},
+  {year: 2040, month: '02/2040', monthly: 2060.68},
+  {year: 2041, month: '02/2041', monthly: 2313.24},
+  {year: 2042, month: '02/2042', monthly: 2597.30},
+  {year: 2043, month: '02/2043', monthly: 2914.50},
+  {year: 2044, month: '02/2044', monthly: 3269.52},
+  {year: 2045, month: '02/2045', monthly: 3666.87},
+  {year: 2046, month: '02/2046', monthly: 4109.19},
+  {year: 2047, month: '02/2047', monthly: 4602.15},
+  {year: 2048, month: '02/2048', monthly: 5153.10}
+];
+
+// Phoenix Mortgage 3109874085 — combined monthly
+var phoenixMortgage = {
+  2025: 182.17, 2026: 258.51, 2027: 344.76, 2028: 447.39, 2029: 567.00,
+  2030: 703.85, 2031: 906.56, 2032: 992.94, 2033: 1084.71, 2034: 1184.06,
+  2035: 1288.19, 2036: 1343.76, 2037: 1455.73, 2038: 1572.39, 2039: 1687.44,
+  2040: 1789.86, 2041: 1891.34, 2042: 1990.01, 2043: 2097.77, 2044: 2196.36,
+  2045: 2281.23, 2046: 2352.03, 2047: 2396.93, 2048: 2325.22
+};
+
+// AIG 70080260326 — 1.35M decreasing, monthly BEFORE 20% discount
+var aig1Before = {
+  2026: 276.93, 2027: 297.02, 2028: 299.53, 2029: 317.47, 2030: 343.83,
+  2031: 374.85, 2032: 405.99, 2033: 442.38, 2034: 483.29, 2035: 533.79,
+  2036: 585.34, 2037: 624.56, 2038: 621.98, 2039: 635.35, 2040: 650.85,
+  2041: 683.68, 2042: 717.17, 2043: 751.75, 2044: 785.80, 2045: 822.20,
+  2046: 837.37, 2047: 837.27, 2048: 785.01, 2049: 761.34, 2050: 722.55,
+  2051: 662.08, 2052: 575.22, 2053: 456.59, 2054: 300.22, 2055: 98.98
+};
+
+// AIG 70080262326 — 1M fixed, monthly BEFORE 20% discount
+var aig2Before = {
+  2026: 205.13, 2027: 225.27, 2028: 232.87, 2029: 253.33, 2030: 282.00,
+  2031: 316.47, 2032: 353.40, 2033: 397.73, 2034: 449.67, 2035: 515.07,
+  2036: 587.13, 2037: 652.93, 2038: 679.67, 2039: 728.07, 2040: 785.00,
+  2041: 871.53, 2042: 970.87, 2043: 1086.73, 2044: 1220.87, 2045: 1383.47,
+  2046: 1540.07, 2047: 1702.27, 2048: 1789.47, 2049: 1981.80, 2050: 2201.07,
+  2051: 2443.47, 2052: 2710.73, 2053: 3004.73, 2054: 3328.87
+};
+
+// AIG insurance sums by year (70080260326 — decreasing)
+var aig1Sum = {
+  2026: 1350000, 2027: 1318528, 2028: 1286260, 2029: 1253176, 2030: 1219255,
+  2031: 1184477, 2032: 1148819, 2033: 1112260, 2034: 1074776, 2035: 1036344,
+  2036: 996940, 2037: 956539, 2038: 915117, 2039: 872648, 2040: 829104,
+  2041: 784460, 2042: 738686, 2043: 691755, 2044: 643637, 2045: 594302,
+  2046: 543720, 2047: 491858, 2048: 438685, 2049: 384168, 2050: 328271,
+  2051: 270961, 2052: 212202, 2053: 151957, 2054: 90188, 2055: 26858
+};
+
+var DISCOUNT = 0.8; // 20% discount
+
+function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
+function fmt2(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+
+var currentTab = 'monthly';
+
+function showTab(tab) {
+  currentTab = tab;
+  var buttons = document.querySelectorAll('.tab-bar button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].className = buttons[i].textContent.indexOf(tab === 'monthly' ? 'חודשית' : 'שנתית') >= 0 ? 'active' : '';
+  }
+  buildMortgageTable();
+}
+
+function buildTables() {
+  buildRiskTable();
+  buildMortgageTable();
+}
+
+function buildRiskTable() {
+  var html = '<table>';
+  html += '<thead><tr><th>שנה</th><th>פרמיה חודשית</th><th>פרמיה שנתית</th><th>סה"כ מצטבר</th></tr></thead>';
+  html += '<tbody>';
+  var cumulative = 0;
+  for (var i = 0; i < riskData.length; i++) {
+    var d = riskData[i];
+    var annual = d.monthly * 12;
+    cumulative += annual;
+    var cls = (d.year === 2026) ? ' class="year-highlight"' : '';
+    html += '<tr' + cls + '>';
+    html += '<td><strong>' + d.year + '</strong></td>';
+    html += '<td>₪' + fmt2(d.monthly) + '</td>';
+    html += '<td>₪' + fmt(annual) + '</td>';
+    html += '<td>₪' + fmt(cumulative) + '</td>';
+    html += '</tr>';
+  }
+  // Summary
+  var totalAll = 0;
+  for (var i = 0; i < riskData.length; i++) totalAll += riskData[i].monthly * 12;
+  html += '<tr class="summary-row"><td>סה"כ לכל התקופה</td><td></td><td></td><td>₪' + fmt(totalAll) + '</td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('risk-table').innerHTML = html;
+}
+
+function buildMortgageTable() {
+  var isMonthly = (currentTab === 'monthly');
+  var multi = isMonthly ? 1 : 12;
+  var label = isMonthly ? 'חודשית' : 'שנתית';
+
+  // Collect all years
+  var years = [];
+  var allKeys = Object.keys(phoenixMortgage).concat(Object.keys(aig1Before)).concat(Object.keys(aig2Before));
+  var seen = {};
+  for (var i = 0; i < allKeys.length; i++) {
+    var y = parseInt(allKeys[i]);
+    if (!seen[y]) { years.push(y); seen[y] = true; }
+  }
+  years.sort(function(a,b){ return a-b; });
+
+  var html = '<table>';
+  html += '<thead><tr>';
+  html += '<th>שנה</th>';
+  html += '<th style="background:#c0792a;">הפניקס<br>' + label + '</th>';
+  html += '<th style="background:#1a6baa;">AIG #1<br>1.35M יורד<br>' + label + '</th>';
+  html += '<th style="background:#1a8a3a;">AIG #2<br>1M קבוע<br>' + label + '</th>';
+  html += '<th style="background:#8a1a3a;">AIG סה"כ<br>' + label + '</th>';
+  html += '<th style="background:#444;">הפרש<br>AIG − הפניקס</th>';
+  html += '</tr></thead>';
+  html += '<tbody>';
+
+  var cumPhoenix = 0, cumAig = 0;
+
+  for (var i = 0; i < years.length; i++) {
+    var y = years[i];
+    var ph = phoenixMortgage[y] || 0;
+    var a1 = (aig1Before[y] || 0) * DISCOUNT;
+    var a2 = (aig2Before[y] || 0) * DISCOUNT;
+    var aigTotal = a1 + a2;
+    var diff = aigTotal - ph;
+
+    cumPhoenix += ph * 12;
+    cumAig += aigTotal * 12;
+
+    var phVal = ph ? '₪' + fmt(ph * multi) : '—';
+    var a1Val = a1 ? '₪' + fmt(a1 * multi) : '—';
+    var a2Val = a2 ? '₪' + fmt(a2 * multi) : '—';
+    var aigVal = aigTotal ? '₪' + fmt(aigTotal * multi) : '—';
+
+    var diffStr = '';
+    var diffCls = '';
+    if (ph && aigTotal) {
+      var diffVal = diff * multi;
+      if (diffVal > 0) {
+        diffStr = '+₪' + fmt(diffVal);
+        diffCls = 'col-diff-negative';
+      } else {
+        diffStr = '−₪' + fmt(Math.abs(diffVal));
+        diffCls = 'col-diff-positive';
+      }
+    } else if (aigTotal && !ph) {
+      diffStr = '—';
+    } else {
+      diffStr = '—';
+    }
+
+    var cls = (y === 2026) ? ' class="year-highlight"' : '';
+    html += '<tr' + cls + '>';
+    html += '<td><strong>' + y + '</strong></td>';
+    html += '<td class="col-phoenix">' + phVal + '</td>';
+    html += '<td class="col-aig1">' + a1Val + '</td>';
+    html += '<td class="col-aig2">' + a2Val + '</td>';
+    html += '<td class="col-total">' + aigVal + '</td>';
+    html += '<td class="' + diffCls + '">' + diffStr + '</td>';
+    html += '</tr>';
+  }
+
+  // Summary row
+  html += '<tr class="summary-row">';
+  html += '<td>סה"כ מצטבר</td>';
+  html += '<td>₪' + fmt(cumPhoenix) + '</td>';
+  html += '<td></td><td></td>';
+  html += '<td>₪' + fmt(cumAig) + '</td>';
+  var totalDiff = cumAig - cumPhoenix;
+  html += '<td>' + (totalDiff > 0 ? '+' : '−') + '₪' + fmt(Math.abs(totalDiff)) + '</td>';
+  html += '</tr>';
+
+  html += '</tbody></table>';
+  document.getElementById('mortgage-table').innerHTML = html;
+}
 </script>
 
 </body>
