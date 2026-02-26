@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>השוואת ביטוחי חיים — משפחת שלם</title>
+<title>השוואת ביטוחים — משפחת שלם</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #1a1a2e; line-height: 1.6; }
@@ -68,6 +68,21 @@ tr.summary-row td { background: #1a1a2e !important; color: #fff; font-weight: 70
 .pdf-list li a:hover { background: #eef3fa; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .pdf-list li a::before { content: "📄 "; }
 
+/* Section divider */
+.divider { text-align: center; margin: 50px 0 30px; position: relative; }
+.divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #ddd; }
+.divider span { background: #f5f7fa; padding: 0 20px; position: relative; font-size: 22px; font-weight: 700; color: #0f3460; }
+
+/* Coverage matrix */
+.matrix { font-size: 13px; }
+.matrix th { font-size: 12px; padding: 8px 10px; }
+.matrix td { padding: 8px 10px; text-align: center; }
+.matrix td.name-cell { text-align: right; font-weight: 600; }
+.has { color: #28a745; }
+.hasnt { color: #ccc; }
+.partial { color: #e67e22; }
+.warn-row td { background: #fff3cd !important; }
+
 footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border-top: 1px solid #eee; margin-top: 40px; }
 
 @media (max-width: 600px) {
@@ -83,7 +98,7 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 <!-- Password Gate -->
 <div id="gate">
   <div id="gate-box">
-    <h2>השוואת ביטוחי חיים</h2>
+    <h2>השוואת ביטוחים</h2>
     <p>משפחת שלם — הזן סיסמה לצפייה</p>
     <input type="password" id="pw" placeholder="****" maxlength="10" autofocus>
     <button onclick="checkPw()">כניסה</button>
@@ -95,11 +110,13 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 <div id="content">
 
 <header>
-  <h1>השוואת ביטוחי חיים — משפחת שלם</h1>
-  <p>מחירים שנתיים לפי פוליסות בפועל | פברואר 2026</p>
+  <h1>השוואת ביטוחים — משפחת שלם</h1>
+  <p>חיים + בריאות | מחירים שנתיים לפי פוליסות בפועל | פברואר 2026</p>
 </header>
 
 <div class="container">
+
+<div class="divider"><span>ביטוח חיים</span></div>
 
 <!-- ======================== -->
 <!-- What's being compared    -->
@@ -148,16 +165,145 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
   <div class="table-wrap" id="full-table"></div>
 </div>
 
+<!-- ============================================ -->
+<!-- HEALTH INSURANCE SECTION                     -->
+<!-- ============================================ -->
+<div class="divider"><span>ביטוח בריאות</span></div>
+
+<!-- Who is covered where -->
+<div class="section">
+  <h2>מי מבוטח/ת איפה?</h2>
+  <p class="section-sub">6 בני משפחה, 5 פוליסות ישנות מול 2 פוליסות AIG</p>
+
+  <div class="table-wrap">
+    <table class="matrix">
+      <thead><tr>
+        <th>מבוטח/ת</th>
+        <th style="background:#c0792a;">ביטוח ישיר<br>₪60/חודש</th>
+        <th style="background:#c0792a;">הפניקס<br>₪547/חודש</th>
+        <th style="background:#c0792a;">מגדל<br>₪402/חודש</th>
+        <th style="background:#1a6baa;">AIG משפחה<br>₪811/חודש</th>
+        <th style="background:#1a6baa;">AIG אמתי<br>₪99/חודש</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="name-cell">צבי</td>
+          <td class="has">2 פוליסות</td><td class="has">7 כיסויים</td><td class="has">דואגים למחר</td>
+          <td class="has">9 כיסויים</td><td class="hasnt">—</td></tr>
+        <tr><td class="name-cell">מיכל</td>
+          <td class="has">2 פוליסות</td><td class="hasnt">—</td><td class="has">תרופות/השתלות/ייעוץ</td>
+          <td class="has">10 כיסויים</td><td class="hasnt">—</td></tr>
+        <tr><td class="name-cell">נעמי</td>
+          <td class="hasnt">—</td><td class="has">12 כיסויים</td><td class="hasnt">—</td>
+          <td class="has">10 כיסויים</td><td class="hasnt">—</td></tr>
+        <tr><td class="name-cell">יערה</td>
+          <td class="hasnt">—</td><td class="has">14 כיסויים</td><td class="hasnt">—</td>
+          <td class="has">10 כיסויים</td><td class="hasnt">—</td></tr>
+        <tr class="warn-row"><td class="name-cell">אמתי</td>
+          <td class="hasnt">—</td><td class="partial">2 כיסויים בלבד</td><td class="hasnt">—</td>
+          <td class="hasnt">—</td><td class="has">10 כיסויים</td></tr>
+        <tr class="warn-row"><td class="name-cell">איתמר</td>
+          <td class="hasnt">—</td><td class="partial">2 כיסויים בלבד</td><td class="hasnt">—</td>
+          <td class="has">10 כיסויים</td><td class="hasnt">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="coverage-note">
+    <strong>שדרוג משמעותי ב-AIG:</strong>
+    אמתי ואיתמר עברו מ-2 כיסויים בהפניקס ל-10 כיסויים מלאים.<br>
+    מיכל לא הייתה מבוטחת כלל בהפניקס — עכשיו מקבלת 10 כיסויים ב-AIG (עם תוספת חיתום).
+  </div>
+</div>
+
+<!-- Coverage comparison -->
+<div class="section">
+  <h2>השוואת כיסויים</h2>
+  <p class="section-sub">מה כלול בכל שיטה?</p>
+
+  <div class="table-wrap">
+    <table class="matrix">
+      <thead><tr>
+        <th>כיסוי</th>
+        <th style="background:#c0792a;">ביטוח ישיר</th>
+        <th style="background:#c0792a;">הפניקס</th>
+        <th style="background:#c0792a;">מגדל</th>
+        <th style="background:#1a6baa;">AIG</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="name-cell">משלים שב"ן / ניתוחים</td>
+          <td class="hasnt">—</td><td class="has">נספח 6783</td><td class="hasnt">—</td><td class="has">כיסוי 1</td></tr>
+        <tr><td class="name-cell">מחלות קשות</td>
+          <td class="hasnt">—</td><td class="has">נספח 5282</td><td class="hasnt">—</td><td class="has">Extra Care 28+29</td></tr>
+        <tr><td class="name-cell">תרופות מחוץ לסל</td>
+          <td class="hasnt">—</td><td class="has">נספח 6787</td><td class="has">מיכל בלבד</td><td class="has">כיסוי 22</td></tr>
+        <tr><td class="name-cell">ניתוחים בחו"ל</td>
+          <td class="hasnt">—</td><td class="has">נספח 6785</td><td class="hasnt">—</td><td class="has">כיסוי 23</td></tr>
+        <tr><td class="name-cell">השתלות בחו"ל</td>
+          <td class="hasnt">—</td><td class="has">נספח 6788</td><td class="has">מיכל בלבד</td><td class="has">כיסוי 20</td></tr>
+        <tr><td class="name-cell">ייעוץ ובדיקות</td>
+          <td class="hasnt">—</td><td class="has">נספח 6782</td><td class="has">מיכל בלבד</td><td class="has">כיסוי 25</td></tr>
+        <tr><td class="name-cell">סל טיפולים</td>
+          <td class="hasnt">—</td><td class="hasnt">—</td><td class="hasnt">—</td><td class="has">כיסוי 26</td></tr>
+        <tr><td class="name-cell">טכנולוגיות מתקדמות</td>
+          <td class="hasnt">—</td><td class="hasnt">—</td><td class="hasnt">—</td><td class="has">כיסוי 32</td></tr>
+        <tr><td class="name-cell">ביטוח בסיסי</td>
+          <td class="has">בסיסי</td><td class="hasnt">—</td><td class="hasnt">—</td><td class="has">כיסוי 20</td></tr>
+        <tr><td class="name-cell">סיעודי / דואגים למחר</td>
+          <td class="hasnt">—</td><td class="hasnt">—</td><td class="has">צבי בלבד</td><td class="hasnt">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="coverage-note" style="background:#fff3cd; border-color:#ffc107;">
+    <strong>מה חסר ב-AIG:</strong>
+    סיעודי / דואגים למחר (מגדל 15054352) — אין מקבילה ב-AIG. זה כיסוי נפרד.<br>
+    <strong>מה חדש ב-AIG:</strong>
+    סל טיפולים + טכנולוגיות מתקדמות — לא היו קיימים בשום פוליסה ישנה.
+  </div>
+</div>
+
+<!-- Health cost comparison -->
+<div class="section">
+  <h2>השוואת עלות שנתית — בריאות</h2>
+  <p class="section-sub">ישן (ביטוח ישיר + הפניקס + מגדל = ₪12,111/שנה) מול AIG (משפחה + אמתי)</p>
+
+  <div class="coverage-note">
+    <strong>הערה חשובה:</strong>
+    לפוליסות הישנות אין טבלת מחירים עתידית — מוצגות לפי עלות נוכחית (₪12,111/שנה).<br>
+    עלות AIG מתוך טבלת הפרמיה העתידית שבפוליסה. <strong>הנחות נעולות עד 01/2036</strong> — אחרי זה קפיצה של ~48%.
+  </div>
+
+  <div class="table-wrap" id="health-main-table"></div>
+</div>
+
+<!-- Health full detail -->
+<div class="section">
+  <h2>בריאות — טבלה מפורטת</h2>
+  <p class="section-sub">פירוט: ישן קבוע | AIG משפחה | AIG אמתי | סה"כ AIG | הפרש</p>
+
+  <div class="table-wrap" id="health-full-table"></div>
+</div>
+
 <!-- ======================== -->
 <!-- PDFs                     -->
 <!-- ======================== -->
+<div class="divider"><span>מסמכי מקור</span></div>
+
 <div class="section">
-  <h2>מסמכי מקור (PDF)</h2>
+  <h2>מסמכי מקור — חיים (PDF)</h2>
   <ul class="pdf-list">
     <li><a href="pdfs/phoenix_risk_2814174088.pdf" target="_blank">הפניקס — ריסק 2814174088</a></li>
     <li><a href="pdfs/phoenix_mortgage_3109874085.pdf" target="_blank">הפניקס — משכנתא 3109874085</a></li>
     <li><a href="pdfs/%D7%91%D7%99%D7%98%D7%95%D7%97%20%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90-%D7%9E%D7%A4%D7%A8%D7%98%20%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94%2070080260326.pdf" target="_blank">AIG — משכנתא 70080260326 (1.35M יורד)</a></li>
     <li><a href="pdfs/%D7%91%D7%99%D7%98%D7%95%D7%97%20%D7%9E%D7%A9%D7%9B%D7%A0%D7%AA%D7%90-%D7%9E%D7%A4%D7%A8%D7%98%20%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94%2070080262326.pdf" target="_blank">AIG — משכנתא 70080262326 (1M קבוע)</a></li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>מסמכי מקור — בריאות (PDF)</h2>
+  <ul class="pdf-list">
+    <li><a href="pdfs/aig_health_730027730526.pdf" target="_blank">AIG — בריאות משפחה 730027730526 (צבי, מיכל, נעמי, יערה, איתמר)</a></li>
+    <li><a href="pdfs/aig_health_730027731426_amtai.pdf" target="_blank">AIG — בריאות אמתי 730027731426</a></li>
   </ul>
 </div>
 
@@ -256,7 +402,34 @@ var aig1Sum = {
   2051: 270961, 2052: 212202, 2053: 151957, 2054: 90188, 2055: 26858
 };
 
-var DISCOUNT = 0.8; // 20% discount
+var DISCOUNT = 0.8; // 20% life discount
+
+/* ===== HEALTH DATA ===== */
+
+// Old health: constant annual cost (no year-by-year data available)
+var OLD_HEALTH_ANNUAL = 12111; // ביטוח ישיר 723 + הפניקס 6564 + מגדל 4824
+
+// AIG family 730027730526 — annual premiums (includes built-in 25-30% discounts, locked until 01/2036)
+var aigFamilyHealth = {
+  2026: 9618, 2027: 9556, 2028: 10044, 2029: 10965, 2030: 12001,
+  2031: 12237, 2032: 12561, 2033: 12776, 2034: 14518, 2035: 15595,
+  2036: 23111, 2037: 24032, 2038: 25509, 2039: 26911, 2040: 28939,
+  2041: 29606, 2042: 30127, 2043: 30628, 2044: 33209, 2045: 35189,
+  2046: 36172, 2047: 36862, 2048: 38021, 2049: 38927, 2050: 40682,
+  2051: 41943, 2052: 43210, 2053: 36659, 2054: 27917, 2055: 28108,
+  2056: 28920, 2057: 29177, 2058: 30101
+};
+
+// AIG Amtai 730027731426 — annual premiums (AFTER built-in discounts)
+var aigAmtaiHealth = {
+  2026: 1186, 2027: 1208, 2028: 1635, 2029: 1635, 2030: 1644,
+  2031: 1646, 2032: 1648, 2033: 1654, 2034: 1659, 2035: 1663,
+  2036: 2537, 2037: 2554, 2038: 3191, 2039: 3212, 2040: 3242,
+  2041: 3276, 2042: 3319, 2043: 3380, 2044: 3453, 2045: 3527,
+  2046: 3617, 2047: 3703, 2048: 4699, 2049: 4859, 2050: 5040,
+  2051: 5241, 2052: 5443, 2053: 5575, 2054: 5689, 2055: 5790,
+  2056: 5877, 2057: 5888, 2058: 6923
+};
 
 function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
 
@@ -301,6 +474,8 @@ function diffCell(a, b) {
 function buildTables() {
   buildNormalizedTable();
   buildFullTable();
+  buildHealthMainTable();
+  buildHealthFullTable();
 }
 
 /* ===== Main table: normalized ===== */
@@ -402,6 +577,109 @@ function buildFullTable() {
 
   html += '</tbody></table>';
   document.getElementById('full-table').innerHTML = html;
+}
+
+/* ===== Health tables ===== */
+
+function getHealthYears() {
+  var years = [], seen = {};
+  var keys = Object.keys(aigFamilyHealth).concat(Object.keys(aigAmtaiHealth));
+  for (var i = 0; i < keys.length; i++) {
+    var y = parseInt(keys[i]);
+    if (!seen[y]) { years.push(y); seen[y] = true; }
+  }
+  return years.sort(function(a,b){ return a-b; });
+}
+
+function buildHealthMainTable() {
+  var years = getHealthYears();
+  var html = '<table>';
+  html += '<thead><tr>';
+  html += '<th>שנה</th>';
+  html += '<th style="background:#c0792a;">ישן (5 פוליסות)</th>';
+  html += '<th style="background:#1a6baa;">AIG (2 פוליסות)</th>';
+  html += '<th style="background:#444;">הפרש</th>';
+  html += '</tr></thead><tbody>';
+
+  var cumOld = 0, cumAig = 0;
+  for (var i = 0; i < years.length; i++) {
+    var y = years[i];
+    var oldH = OLD_HEALTH_ANNUAL;
+    var aigF = aigFamilyHealth[y] || 0;
+    var aigA = aigAmtaiHealth[y] || 0;
+    var aigH = aigF + aigA;
+    cumOld += oldH; cumAig += aigH;
+
+    var cls = (y === 2026) ? ' class="year-highlight"' : (y === 2036) ? ' class="warn-row"' : '';
+    html += '<tr' + cls + '>';
+    html += '<td><strong>' + y + '</strong></td>';
+    html += '<td class="col-phoenix">₪' + fmt(oldH) + '</td>';
+    html += '<td class="col-aig1">₪' + fmt(aigH) + '</td>';
+    var dc = diffCell(aigH, oldH);
+    html += '<td class="' + dc.cls + '">' + dc.str + '</td>';
+    html += '</tr>';
+  }
+
+  html += '<tr class="summary-row"><td>סה"כ (' + years.length + ' שנים)</td>';
+  html += '<td>₪' + fmt(cumOld) + '</td><td>₪' + fmt(cumAig) + '</td>';
+  var td = diffCell(cumAig, cumOld);
+  html += '<td>' + td.str + '</td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('health-main-table').innerHTML = html;
+}
+
+function buildHealthFullTable() {
+  var years = getHealthYears();
+  var html = '<table>';
+  html += '<thead>';
+  html += '<tr>';
+  html += '<th rowspan="2">שנה</th>';
+  html += '<th colspan="4" style="background:#c0792a;text-align:center;">שיטה ישנה</th>';
+  html += '<th colspan="3" style="background:#1a6baa;text-align:center;">AIG חדש</th>';
+  html += '<th rowspan="2" style="background:#444;">הפרש</th>';
+  html += '</tr><tr>';
+  html += '<th style="background:#d4943a;">ביטוח ישיר</th>';
+  html += '<th style="background:#d4943a;">הפניקס</th>';
+  html += '<th style="background:#d4943a;">מגדל</th>';
+  html += '<th style="background:#c0792a;">סה"כ ישן</th>';
+  html += '<th style="background:#2a7fc0;">משפחה</th>';
+  html += '<th style="background:#2a7fc0;">אמתי</th>';
+  html += '<th style="background:#1a6baa;">סה"כ AIG</th>';
+  html += '</tr></thead><tbody>';
+
+  var yashirA = 723, phoenixA = 6564, migdalA = 4824;
+  var cumOld = 0, cumAig = 0;
+
+  for (var i = 0; i < years.length; i++) {
+    var y = years[i];
+    var oldH = OLD_HEALTH_ANNUAL;
+    var aigF = aigFamilyHealth[y] || 0;
+    var aigA = aigAmtaiHealth[y] || 0;
+    var aigH = aigF + aigA;
+    cumOld += oldH; cumAig += aigH;
+
+    var cls = (y === 2026) ? ' class="year-highlight"' : (y === 2036) ? ' class="warn-row"' : '';
+    html += '<tr' + cls + '>';
+    html += '<td><strong>' + y + '</strong></td>';
+    html += '<td class="col-phoenix">₪' + fmt(yashirA) + '</td>';
+    html += '<td class="col-phoenix">₪' + fmt(phoenixA) + '</td>';
+    html += '<td class="col-phoenix">₪' + fmt(migdalA) + '</td>';
+    html += '<td class="col-phoenix" style="font-weight:600;">₪' + fmt(oldH) + '</td>';
+    html += '<td class="col-aig1">₪' + fmt(aigF) + '</td>';
+    html += '<td class="col-aig1">₪' + fmt(aigA) + '</td>';
+    html += '<td class="col-aig1" style="font-weight:600;">₪' + fmt(aigH) + '</td>';
+    var dc = diffCell(aigH, oldH);
+    html += '<td class="' + dc.cls + '">' + dc.str + '</td>';
+    html += '</tr>';
+  }
+
+  html += '<tr class="summary-row"><td>סה"כ</td>';
+  html += '<td></td><td></td><td></td><td>₪' + fmt(cumOld) + '</td>';
+  html += '<td></td><td></td><td>₪' + fmt(cumAig) + '</td>';
+  var td = diffCell(cumAig, cumOld);
+  html += '<td>' + td.str + '</td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('health-full-table').innerHTML = html;
 }
 </script>
 
