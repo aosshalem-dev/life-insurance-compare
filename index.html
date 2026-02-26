@@ -133,6 +133,22 @@ footer { text-align: center; padding: 24px; color: #999; font-size: 12px; border
 </div>
 
 <!-- ======================== -->
+<!-- Normalized comparison    -->
+<!-- ======================== -->
+<div class="section">
+  <h2>השוואה מנורמלת — אותו סכום כיסוי</h2>
+  <p class="section-sub">כמה הייתה עולה שיטת הפניקס אם הייתה מכסה ₪4.55M כמו AIG? (מכפיל ×4.55/3.55 = ×1.28)</p>
+
+  <div class="coverage-note">
+    <strong>למה צריך נרמול?</strong>
+    הפניקס מכסה ₪3.55M | AIG מכסה ₪4.55M+ — כיסוי שונה, מחיר שונה.<br>
+    כדי להשוות הוגן, מכפילים את עלות הפניקס ב-×1.28 כאילו מכסה את אותו סכום כמו AIG.
+  </div>
+
+  <div class="table-wrap" id="normalized-table"></div>
+</div>
+
+<!-- ======================== -->
 <!-- PDFs                     -->
 <!-- ======================== -->
 <div class="section">
@@ -248,7 +264,90 @@ function fmt(n) { return n.toLocaleString('he-IL', {minimumFractionDigits: 0, ma
 var riskByYear = {};
 for (var i = 0; i < riskData.length; i++) riskByYear[riskData[i].year] = riskData[i].monthly;
 
+var NORMALIZE = 4.55 / 3.55; // ~1.2817
+
 function buildTables() {
+  buildCombinedTable();
+  buildNormalizedTable();
+}
+
+function buildNormalizedTable() {
+  var years = [], seen = {};
+  var sources = [riskByYear, phoenixMortgage, aig1Before, aig2Before];
+  for (var s = 0; s < sources.length; s++) {
+    var keys = Object.keys(sources[s]);
+    for (var i = 0; i < keys.length; i++) {
+      var y = parseInt(keys[i]);
+      if (!seen[y]) { years.push(y); seen[y] = true; }
+    }
+  }
+  years.sort(function(a,b){ return a-b; });
+
+  var html = '<table>';
+  html += '<thead><tr>';
+  html += '<th>שנה</th>';
+  html += '<th style="background:#c0792a;">הפניקס מנורמל<br>×1.28</th>';
+  html += '<th style="background:#1a6baa;">שיטה חדשה<br>ריסק + AIG</th>';
+  html += '<th style="background:#444;">הפרש</th>';
+  html += '</tr></thead>';
+  html += '<tbody>';
+
+  var cumOldNorm = 0, cumNew = 0;
+
+  for (var i = 0; i < years.length; i++) {
+    var y = years[i];
+    var risk = (riskByYear[y] || 0) * 12;
+    var phMort = (phoenixMortgage[y] || 0) * 12;
+    var oldTotal = risk + phMort;
+    var oldNorm = oldTotal * NORMALIZE;
+
+    var a1 = (aig1Before[y] || 0) * DISCOUNT * 12;
+    var a2 = (aig2Before[y] || 0) * DISCOUNT * 12;
+    var newTotal = (y < 2026) ? oldNorm : risk + a1 + a2;
+
+    cumOldNorm += oldNorm;
+    cumNew += newTotal;
+
+    var oldVal = oldNorm ? '₪' + fmt(oldNorm) : '—';
+    var newVal = newTotal ? '₪' + fmt(newTotal) : '—';
+
+    var diffStr = '—';
+    var diffCls = '';
+    if (oldNorm && newTotal && y >= 2026) {
+      var diff = newTotal - oldNorm;
+      if (diff > 0) {
+        diffStr = '+₪' + fmt(diff);
+        diffCls = 'col-diff-negative';
+      } else if (diff < 0) {
+        diffStr = '−₪' + fmt(Math.abs(diff));
+        diffCls = 'col-diff-positive';
+      } else {
+        diffStr = '₪0';
+      }
+    }
+
+    var cls = (y === 2026) ? ' class="year-highlight"' : '';
+    html += '<tr' + cls + '>';
+    html += '<td><strong>' + y + '</strong></td>';
+    html += '<td class="col-phoenix">' + oldVal + '</td>';
+    html += '<td class="col-aig1">' + newVal + '</td>';
+    html += '<td class="' + diffCls + '">' + diffStr + '</td>';
+    html += '</tr>';
+  }
+
+  html += '<tr class="summary-row">';
+  html += '<td>סה"כ לכל התקופה</td>';
+  html += '<td>₪' + fmt(cumOldNorm) + '</td>';
+  html += '<td>₪' + fmt(cumNew) + '</td>';
+  var totalDiff = cumNew - cumOldNorm;
+  html += '<td>' + (totalDiff > 0 ? '+' : '−') + '₪' + fmt(Math.abs(totalDiff)) + '</td>';
+  html += '</tr>';
+
+  html += '</tbody></table>';
+  document.getElementById('normalized-table').innerHTML = html;
+}
+
+function buildCombinedTable() {
   // Collect all years from all data sources
   var years = [], seen = {};
   var sources = [riskByYear, phoenixMortgage, aig1Before, aig2Before];
